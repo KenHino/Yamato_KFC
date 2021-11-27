@@ -1,6 +1,7 @@
 この下にGitHubのユーザー名を書いて，
 - KenHino
 - nysitk
+- DeguchiTakumi
 
 以下のコマンドでpushしてください。
 ```
