@@ -1,0 +1,8 @@
+以下のコードで、Djangoをインストール
+$ python -m pip install Django
+参考：https://docs.djangoproject.com/ja/3.2/intro/install/
+
+サーバーを実行開始する
+$ python manage.py runserver
+
+ブラウザで、 http://127.0.0.1:8000/yamato/ にアクセス
