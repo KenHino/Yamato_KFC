@@ -35,6 +35,7 @@ class simulator:
         
         if self.arrive_time[j_cargo][0] <= self.now_time + self.time_matrix[i_cargo][j_cargo][self.now_time] <= self.arrive_time[j_cargo][1]:
             dum = weight[0] * self.distance_matrix[i_cargo][j_cargo] + weight[1] * self.time_matrix[i_cargo][j_cargo][self.now_time]
+            
         else:
             dum = float('inf')
 
@@ -78,11 +79,13 @@ class simulator:
             rand = random.random()
             temp = self.Temperature()
             if rand < math.exp((cost_before-cost_after)/temp):
+                print('aaa')
                 return True
             else:
+                print('bbb')
                 return False
 
-    def optimize(self, from_start=True):
+    def optimize(self, from_start=True, print_out=False):
         if from_start:
             cargo_index = 0
         else:
@@ -91,8 +94,8 @@ class simulator:
         for N_iter in range(self.max_iter):
             self.N_iter = N_iter
 
-            if cargo_index == 1:
-                self.now_time = 0
+            if cargo_index == 0:
+                self.now_time = self.time_matrix[self.order[0]][self.order[1]][0]
 
             i_cargo, j_cargo, k_cargo, l_cargo = self.order[cargo_index:cargo_index+4]
 
@@ -106,10 +109,14 @@ class simulator:
                 cargo_index = 0
             else:
                 cargo_index += 1
+            
+            if print_out:
+                print(self.output())
 
     
     def output(self):
-        return [self.cost_function_total, self.order]
+        cost = self.cost_function_total()
+        return [cost, self.order]
 
 
 
