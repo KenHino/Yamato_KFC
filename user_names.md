@@ -1,5 +1,6 @@
 この下にGitHubのユーザー名を書いて，
 - KenHino
+- nysitk
 
 以下のコマンドでpushしてください。
 ```
