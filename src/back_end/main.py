@@ -15,5 +15,5 @@ arrive_time = [[-1,100], [-1,10], [-1,10], [-1,20]]
 
 
 sim = simulator(coordinate, distance_matrix, time_matrix, arrive_time, max_iter=20)
-sim.optimize()
+sim.optimize(print_out=False)
 print(sim.output())

@@ -73,16 +73,14 @@ class simulator:
                     + self.cost_function_2opt(k_cargo, j_cargo)\
                     + self.cost_function_2opt(j_cargo, l_cargo)
 
-        if cost_before > cost_after:
+        if cost_before >= cost_after:
             return True
         else:
             rand = random.random()
             temp = self.Temperature()
             if rand < math.exp((cost_before-cost_after)/temp):
-                print('aaa')
                 return True
             else:
-                print('bbb')
                 return False
 
     def optimize(self, from_start=True, print_out=False):
@@ -98,6 +96,8 @@ class simulator:
                 self.now_time = self.time_matrix[self.order[0]][self.order[1]][0]
 
             i_cargo, j_cargo, k_cargo, l_cargo = self.order[cargo_index:cargo_index+4]
+            if print_out:
+                print(i_cargo, j_cargo, k_cargo, l_cargo, 'time',self.now_time)
 
             if self.is_swap(i_cargo,j_cargo,k_cargo,l_cargo):
                 self.now_time += self.time_matrix[k_cargo][j_cargo][self.now_time]
@@ -105,7 +105,7 @@ class simulator:
             else:
                 self.now_time += self.time_matrix[j_cargo][k_cargo][self.now_time]
 
-            if cargo_index + 2 + 1== self.N_cargo-1:
+            if cargo_index + 2 == self.N_cargo-1:
                 cargo_index = 0
             else:
                 cargo_index += 1
