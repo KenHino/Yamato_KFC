@@ -72,12 +72,18 @@
                 } else if (selectType == "delivered") {
 
                 }
-                $("#pin-info").html("x:" + this.originx + ", y:" + this.originy);
+                $("#pin-info").html(this.arrive);
+                // $("#pin-info").html("x:" + this.originx + ", y:" + this.originy);
             }
 
             testHit(point) {
                 return (this.rectx <= point.x && point.x <= this.rectx + this.w) &&
                     (this.recty <= point.y && point.y <= this.recty + this.h);
+            }
+
+            drawText() {
+                context.font = "24px serif";
+                context.fillText(this.arrive, this.x+10, this.y+10);
             }
         }
 
@@ -112,12 +118,17 @@
             }
         }
 
-        const pins = [
-            new Pin(200,300),
-            new Pin(100,200),
-            new Pin(400,100),
-            new Pin(150,400),
-        ]
+        const pins = []
+        $(".coordinates").each(function (i, coordinate) {
+            let xelem = $(coordinate).children()[0]
+            let x = $(xelem).data("coordinate")
+            let yelem = $(coordinate).children()[1]
+            let y = $(yelem).data("coordinate")
+
+            pins.push(new Pin((x+10)*20+100, (y+10)*20+100))
+        })
+
+        console.log(pins)
 
         generateMap(pins);
 
@@ -160,7 +171,38 @@
                 pin.draw();
             })
 
-            new Line(pins[0], pins[1]).draw("route");
+            
+            const orders = []
+            $(".orders").each(function (i, order) {
+                let o = $(order).data("order")
+                orders.push(o)
+            })
+            const time_lists = []
+            $(".time_lists").each(function (i, time) {
+                let t = $(time).data("time")
+                time_lists.push(t)
+            })
+
+            let prev, next;
+            $.each(orders, function(i, order) {
+                if (i == 0) {
+                    prev = order;
+                    return true;
+                }
+                next = order;
+                console.log(prev,next)
+                new Line(pins[prev], pins[next]).draw("route");
+                prev = next;
+            })
+
+            
+            $.each(orders, function(i, order) {
+                pins[order].arrive = time_lists[i]
+                pins[order].drawText();
+            })
+
+
+            // new Line(pins[0], pins[1]).draw("route");
 
             function adjustCoordinate(pins) {
                 const xs = pins.map(function(c){return c.x})
@@ -182,16 +224,6 @@
                     })
                 }
             }
-            
-            // function addPoint(val) {
-            //     context.save();
-            //     context.beginPath();
-            //     context.arc(val.x, val.y, 5, 0, Math.PI * 2, false);
-            //     context.fill();
-            //     context.moveTo(val.x, val.y);
-            //     context.restore();
-            // }
-
         }
 
 	}

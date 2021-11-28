@@ -5,18 +5,35 @@
 <link rel="stylesheet" href="{% static 'yamato/index.css' %}">
 <div id="header">
     <div>
-        <h1>（サービス名？）</h1>
+        <h1>KFC scheduling system</h1>
         <p>動的に変化する配送スケジューリングとその可視化</p>
     </div>
     <p>KFC</p>
 </div>
+<div>
+    <div id="data" data-cost="{{cost}}" data-time_list="{{time_list}}" data-order="{{order}}" data-coordinate="{{coordinate}}" data-arrive_time="{{arrive_time}}"></div>
+    {% for cs in coordinate %}
+        <div class="coordinates">
+        {% for c in cs %}
+        <div data-coordinate="{{ c }}"></div>
+        {% endfor %}
+        </div>
+    {% endfor %}
+    {% for o in order %}
+        <div class="orders" data-order="{{ o }}"></div>
+    {% endfor %}
+    {% for t in time_list %}
+        <div class="time_lists" data-time="{{ t }}"></div>
+    {% endfor %}
+</div>
 <div id="main-content">
     <div id="canvas-wrapper">
-        <canvas id="map-canvas" width="800" height="500">
+        <canvas id="map-canvas" width="500" height="500">
             Your browser does not support HTML5 canvas.
         </canvas>
     </div>
     <div id="info">
+        <div>コスト：{{ cost }}</div>
         <form action="{% url 'index' %}" method="POST">
             <input type="time" name="currentTime">
             <input type="submit" value="送信">

@@ -1,8 +1,8 @@
 import numpy as np
-import scipy
+# import scipy
 import math
 import itertools
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import random
 from copy import deepcopy
 
