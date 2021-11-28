@@ -1,0 +1,44 @@
+body {
+	font-family: "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック体", YuGothic, "Noto Sans Japanese", Meiryo, メイリオ, "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", sans-serif;
+	margin: 0;
+	padding: 0;
+	color: #000;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 1;
+	letter-spacing: calc(33em / 1000);
+}
+
+* {
+	box-sizing: border-box;
+	word-wrap: break-word;
+	line-height: 1.5em;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+    display: flex;
+    width: 100%;
+    padding: 2rem;
+    background-color: #fdd000;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#main-content {
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+#map-canvas {
+    margin: 0 auto;
+}
+
+#info {
+    padding: 0 1rem;
+}

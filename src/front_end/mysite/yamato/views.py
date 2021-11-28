@@ -5,6 +5,12 @@ from django.http import HttpResponse
 
 
 def index(request):
-    a = 123456789
-    context = {'a': a}
+    context = {}
+    time_matrix = [[[0]*20, [1]*20, [4]*20, [9]*20],
+               [[1]*20, [0]*20, [1]*20, [4]*20],
+               [[4]*20, [1]*20, [0]*20, [1]*20],
+               [[9]*20, [4]*20, [1]*20, [0]*20]]
+    if request.method == 'POST':
+        context["currentTime"] = request.POST["currentTime"]
+        return render(request, 'yamato/index.html', context)
     return render(request, 'yamato/index.html', context)
